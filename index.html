@@ -1,132 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Bus Pass</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .phone {
-      width: 320px;
-      background-color: #1a1a1a;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 5px solid #ffde59;
-    }
-    .header {
-      background-color: #6200ea;
-      padding: 16px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .content {
-      padding: 16px;
-    }
-    .panel {
-      background-color: #2a2a2a;
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-    .info-box {
-      background-color: #000;
-      padding: 12px;
-      border: 1px solid #555;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-    .info-box b {
-      display: inline-block;
-      width: 100px;
-    }
-    .footer-logo {
-      text-align: center;
-      margin-top: 24px;
-    }
-    .btn {
-      background-color: #6200ea;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-      font-size: 14px;
-      margin-top: 16px;
-      cursor: pointer;
-    }
-    #qr-screen {
-      display: none;
-      text-align: center;
-    }
-    .qr-img {
-      width: 80%;
-      margin: 20px auto;
-    }
-  </style>
-</head>
-<body>
-  <div class="phone">
-    <div class="header">Digital Bus Pass</div>
-    <div class="content">
-      <div id="details-screen">
-        <div class="panel">
-          <div><strong>Thakurpukur</strong> ⇌ <strong>Gitanjali Park</strong></div>
-          <div>Office In Time - 11:30</div>
-          <div>Office Out Time - 19:30</div>
-        </div>
-        <div class="info-box">
-          <div><b>Name:</b> SAYANI SEN</div>
-          <div><b>Employee ID:</b> 123456</div>
-          <div><b>Bus Stop Name:</b> Sakher Bazaar</div>
-          <div><b>Route Type:</b> B</div>
-          <div><b>Start Date:</b> 01-Jul-2025</div>
-          <div><b>End Date:</b> 31-Jul-2025</div>
-          <div><b>Route:</b> Thakurpukur to Gitanjali Park And Return Via-Taratala</div>
-        </div>
-        <button class="btn" onclick="showQR()">View QR</button>
-        <div class="footer-logo">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tata_Consultancy_Services_Logo.svg/2560px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS Logo" width="120" />
-        </div>
-      </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Digital Bus Pass</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        background-color: #000;
+        color: #fff;
+      }
+      .header {
+        background-color: #6a0dad;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+      }
+      .header h1 {
+        font-size: 18px;
+      }
+      .menu,
+      .bell {
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .route-box {
+        background-color: #6a0dad;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+      }
+      .route-box h2 {
+        margin: 0;
+        font-size: 20px;
+      }
+      .route-box .arrow {
+        font-size: 30px;
+        margin: 10px 0;
+      }
+      .timing {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      .pass-card {
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .pass-card .head-card {
+        border-bottom: 2px dashed white;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .d-none {
+        display: none;
+      }
+      .pass-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        font-size: 14px;
+      }
+      .pass-info div {
+        width: 48%;
+        margin-bottom: 8px;
+      }
+      .highlight {
+        font-weight: bold;
+      }
+      .footer {
+        text-align: center;
+        
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .footer img{
+        width:27rem
+      }
+      .click_me {
+        background: #6a0dad;
+        margin: 10 10 10 10;
 
-      <div id="qr-screen">
-        <div class="panel">
-          <div><strong>Thakurpukur</strong> ⇌ <strong>Gitanjali Park</strong></div>
-          <div>Office In Time - 11:30</div>
-          <div>Office Out Time - 19:30</div>
-        </div>
-        <div class="qr-img">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SAMPLE" alt="QR Code" />
-        </div>
-        <button class="btn" onclick="showDetails()">View Details</button>
-        <div class="footer-logo">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tata_Consultancy_Services_Logo.svg/2560px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS Logo" width="120" />
+        margin-left: 7px;
+        margin-right: 7px;
+        border-radius: 29px;
+        display: flex;
+        justify-content: center;
+      }
+      .footer span {
+        display: block;
+        font-size: 12px;
+        font-weight: normal;
+        margin-top: 5px;
+      }
+
+      .corner-triangle {
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: 40px solid #00cc44; /* Green color */
+        border-right: 40px solid transparent;
+        border-radius: 10px 0 0 0;
+      }
+      .out-bx {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="menu">☰</div>
+      <h1>Digital Bus Pass</h1>
+      <div class="bell">🔔</div>
+    </div>
+    <div class="route-box">
+      <h2>Thakurpukur</h2>
+      <div class="arrow">⇄</div>
+      <h2>Gitanjali Park</h2>
+      <div class="timing">
+        <span>Office In Time - 11:30</span>
+        <span>Office Out Time - 19:30</span>
+      </div>
+    </div>
+    <div id="qr-details">
+      <div class="out-bx">
+        <div class="corner-triangle"></div>
+        <div class="pass-card">
+          <div class="">
+            <div class="head-card">
+              <h3>Confirmed Bus Pass</h3>
+            </div>
+
+            <div id="pass-info" class="pass-info">
+              <div>
+                <strong>Name</strong><br /><span class="highlight"
+                  >SHUBHAYU DASGUPTA</span
+                >
+              </div>
+              <div>
+                <strong>Employee ID</strong><br /><span class="highlight"
+                  >1948390</span
+                >
+              </div>
+              <div>
+                <strong>Bus Stop Name</strong><br /><span class="highlight"
+                  >Thakurpukur</span
+                >
+              </div>
+              <div>
+                <strong>Route Type</strong><br /><span class="highlight"
+                  >B</span
+                >
+              </div>
+              <div>
+                <strong>Start Date</strong><br /><span class="highlight"
+                  >03-Jun-2025</span
+                >
+              </div>
+              <div>
+                <strong>End Date</strong><br /><span class="highlight"
+                  >30-Jun-2025</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px">
+            <strong>Route</strong><br />
+            <span class="highlight"
+              >Thakurpukur to Gitanjali Park And Return Via - Taratala</span
+            >
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    function showQR() {
-      document.getElementById('details-screen').style.display = 'none';
-      document.getElementById('qr-screen').style.display = 'block';
-    }
-    function showDetails() {
-      document.getElementById('qr-screen').style.display = 'none';
-      document.getElementById('details-screen').style.display = 'block';
-    }
-  </script>
-</body>
+    <div id="clickButton" class="click_me">
+      <h4 id="text-of-button">View QR</h4>
+    </div>
+    <div class="footer">
+      <img src="./logo.png">
+    </div>
+    <script>
+      var isChanged = false;
+
+      document.getElementById("clickButton").addEventListener("click", () => {
+        isChanged = !isChanged;
+        if (isChanged) {
+          const outBox = document.querySelector(".out-bx");
+          console.log(outBox.offsetWidth, outBox.offsetHeight);
+       
+
+          const newDiv = document.createElement("div");
+          newDiv.id="qr-lg"
+          newDiv.style.width = outBox.offsetWidth;
+          newDiv.style.height = outBox.offsetHeight;
+          const img = document.createElement("img");
+          img.src = "./qr.jpg";
+          img.style.margin="10px"
+             img.style.width = `${outBox.offsetWidth}px`;
+          img.style.height = `${outBox.offsetHeight}px` ;
+          newDiv.appendChild(img);
+
+            outBox.classList.add("d-none");
+          // outBox.style.dispaly = "none";
+          document.querySelector("#qr-details").appendChild(newDiv);
+          document.getElementById("text-of-button").innerText="View Details"
+
+        }
+        else{
+          const qrBox = document.getElementById("qr-lg");
+          qrBox.classList.add("d-none");
+           const outBox = document.querySelector(".out-bx");
+           outBox.classList.remove("d-none");
+             document.getElementById("text-of-button").innerText="View QR"
+
+        }
+      });
+    </script>
+  </body>
 </html>
