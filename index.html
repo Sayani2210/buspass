@@ -82,22 +82,21 @@
       }
       .footer {
         text-align: center;
-        
         font-size: 16px;
         font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
       }
-      .footer img{
-        width:27rem
+      .footer img {
+        width: 200px;
       }
       .click_me {
         background: #6a0dad;
-        margin: 10 10 10 10;
-
-        margin-left: 7px;
-        margin-right: 7px;
+        margin: 10px 10px;
         border-radius: 29px;
         display: flex;
         justify-content: center;
+        cursor: pointer;
       }
       .footer span {
         display: block;
@@ -105,13 +104,12 @@
         font-weight: normal;
         margin-top: 5px;
       }
-
       .corner-triangle {
         top: 0;
         left: 0;
         width: 0;
         height: 0;
-        border-top: 40px solid #00cc44; /* Green color */
+        border-top: 40px solid #00cc44;
         border-right: 40px solid transparent;
         border-radius: 10px 0 0 0;
       }
@@ -119,6 +117,17 @@
         border: 1px solid #ccc;
         border-radius: 10px;
         margin: 10px;
+        overflow: hidden;
+      }
+      .qr-img {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+      .qr-img img {
+        width: 80%;
+        max-width: 300px;
+        border-radius: 12px;
       }
     </style>
   </head>
@@ -128,6 +137,7 @@
       <h1>Digital Bus Pass</h1>
       <div class="bell">🔔</div>
     </div>
+
     <div class="route-box">
       <h2>Thakurpukur</h2>
       <div class="arrow">⇄</div>
@@ -137,55 +147,46 @@
         <span>Office Out Time - 19:30</span>
       </div>
     </div>
+
     <div id="qr-details">
-      <div class="out-bx">
+      <div class="out-bx" id="pass-box">
         <div class="corner-triangle"></div>
         <div class="pass-card">
-          <div class="">
-            <div class="head-card">
-              <h3>Confirmed Bus Pass</h3>
-            </div>
+          <div class="head-card">
+            <h3>Confirmed Bus Pass</h3>
+          </div>
 
-            <div id="pass-info" class="pass-info">
-              <div>
-                <strong>Name</strong><br /><span class="highlight"
-                  >SHUBHAYU DASGUPTA</span
-                >
-              </div>
-              <div>
-                <strong>Employee ID</strong><br /><span class="highlight"
-                  >1948390</span
-                >
-              </div>
-              <div>
-                <strong>Bus Stop Name</strong><br /><span class="highlight"
-                  >Thakurpukur</span
-                >
-              </div>
-              <div>
-                <strong>Route Type</strong><br /><span class="highlight"
-                  >B</span
-                >
-              </div>
-              <div>
-                <strong>Start Date</strong><br /><span class="highlight"
-                  >03-Jun-2025</span
-                >
-              </div>
-              <div>
-                <strong>End Date</strong><br /><span class="highlight"
-                  >30-Jun-2025</span
-                >
-              </div>
+          <div class="pass-info">
+            <div>
+              <strong>Name</strong><br /><span class="highlight">SHUBHAYU DASGUPTA</span>
+            </div>
+            <div>
+              <strong>Employee ID</strong><br /><span class="highlight">1948390</span>
+            </div>
+            <div>
+              <strong>Bus Stop Name</strong><br /><span class="highlight">Thakurpukur</span>
+            </div>
+            <div>
+              <strong>Route Type</strong><br /><span class="highlight">B</span>
+            </div>
+            <div>
+              <strong>Start Date</strong><br /><span class="highlight">03-Jun-2025</span>
+            </div>
+            <div>
+              <strong>End Date</strong><br /><span class="highlight">30-Jun-2025</span>
             </div>
           </div>
 
           <div style="margin-top: 10px">
             <strong>Route</strong><br />
-            <span class="highlight"
-              >Thakurpukur to Gitanjali Park And Return Via - Taratala</span
-            >
+            <span class="highlight">Thakurpukur to Gitanjali Park And Return Via - Taratala</span>
           </div>
+        </div>
+      </div>
+
+      <div class="d-none" id="qr-box">
+        <div class="qr-img">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=SAMPLE" alt="QR Code" />
         </div>
       </div>
     </div>
@@ -193,44 +194,21 @@
     <div id="clickButton" class="click_me">
       <h4 id="text-of-button">View QR</h4>
     </div>
+
     <div class="footer">
-      <img src="./logo.png">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tata_Consultancy_Services_Logo.svg/2560px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS Logo" />
     </div>
+
     <script>
-      var isChanged = false;
+      let isQRVisible = false;
 
       document.getElementById("clickButton").addEventListener("click", () => {
-        isChanged = !isChanged;
-        if (isChanged) {
-          const outBox = document.querySelector(".out-bx");
-          console.log(outBox.offsetWidth, outBox.offsetHeight);
-       
+        isQRVisible = !isQRVisible;
 
-          const newDiv = document.createElement("div");
-          newDiv.id="qr-lg"
-          newDiv.style.width = outBox.offsetWidth;
-          newDiv.style.height = outBox.offsetHeight;
-          const img = document.createElement("img");
-          img.src = "./qr.jpg";
-          img.style.margin="10px"
-             img.style.width = `${outBox.offsetWidth}px`;
-          img.style.height = `${outBox.offsetHeight}px` ;
-          newDiv.appendChild(img);
+        document.getElementById("pass-box").classList.toggle("d-none", isQRVisible);
+        document.getElementById("qr-box").classList.toggle("d-none", !isQRVisible);
 
-            outBox.classList.add("d-none");
-          // outBox.style.dispaly = "none";
-          document.querySelector("#qr-details").appendChild(newDiv);
-          document.getElementById("text-of-button").innerText="View Details"
-
-        }
-        else{
-          const qrBox = document.getElementById("qr-lg");
-          qrBox.classList.add("d-none");
-           const outBox = document.querySelector(".out-bx");
-           outBox.classList.remove("d-none");
-             document.getElementById("text-of-button").innerText="View QR"
-
-        }
+        document.getElementById("text-of-button").innerText = isQRVisible ? "View Details" : "View QR";
       });
     </script>
   </body>
