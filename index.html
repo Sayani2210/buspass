@@ -1,129 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Digital Bus Pass</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    font-family: "Roboto", sans-serif;
-    background-color: #000;
-    color: #fff;
-    overflow: hidden; /* prevent scrolling */
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    height: 100vh;
-    width: 100vw;
-    box-sizing: border-box;
-  }
-  .header {
-    background-color: #6a0dad;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    flex: 0 0 auto;
-  }
-  .header h1 {
-    font-size: 16px;
-    margin: 0;
-  }
-  .menu, .bell {
-    font-size: 20px;
-  }
-  .route-box {
-    background-color: #6a0dad;
-    border-radius: 10px;
-    margin: 8px;
-    padding: 10px;
-    text-align: center;
-    flex: 0 0 auto;
-  }
-  .route-box h2 {
-    margin: 0;
-    font-size: 18px;
-  }
-  .arrow {
-    font-size: 24px;
-    margin: 4px 0;
-  }
-  .timing {
-    font-size: 12px;
-    display: flex;
-    justify-content: space-around;
-    margin-top: 4px;
-  }
-  .content {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-  .pass-card {
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 8px;
-    margin: 4px;
-    text-align: center;
-    font-size: 12px;
-    max-height: 50vh;
-    overflow: hidden;
-  }
-  .pass-card .head-card {
-    border-bottom: 1px dashed #fff;
-    margin-bottom: 6px;
-    padding-bottom: 4px;
-  }
-  .pass-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    text-align: left;
-    font-size: 12px;
-  }
-  .highlight {
-    font-weight: bold;
-  }
-  .qr-img img {
-    width: 180px;
-    max-width: 80%;
-    border-radius: 10px;
-  }
-  .d-none {
-    display: none;
-  }
-  .click_me {
-    background: #6a0dad;
-    margin: 8px;
-    border-radius: 20px;
-    text-align: center;
-    padding: 6px;
-    flex: 0 0 auto;
-  }
-  .footer {
-    flex: 0 0 auto;
-    text-align: center;
-    margin: 4px;
-  }
-  .footer img {
-    width: 120px;
-    height: auto;
-  }
-</style>
-</head>
-<body>
-  <div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Digital Bus Pass</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        background-color: #000;
+        color: #fff;
+      }
+      .header {
+        background-color: #6a0dad;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+      }
+      .header h1 {
+        font-size: 18px;
+      }
+      .menu,
+      .bell {
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .route-box {
+        background-color: #6a0dad;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+      }
+      .route-box h2 {
+        margin: 0;
+        font-size: 20px;
+      }
+      .route-box .arrow {
+        font-size: 30px;
+        margin: 10px 0;
+      }
+      .timing {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      .pass-card {
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .pass-card .head-card {
+        border-bottom: 2px dashed white;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .d-none {
+        display: none;
+      }
+      .pass-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        font-size: 14px;
+      }
+      .pass-info div {
+        width: 48%;
+        margin-bottom: 8px;
+      }
+      .highlight {
+        font-weight: bold;
+      }
+      .footer {
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+      .footer img {
+        width: 200px;
+      }
+      .click_me {
+        background: #6a0dad;
+        margin: 10px 10px;
+        border-radius: 29px;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .footer span {
+        display: block;
+        font-size: 12px;
+        font-weight: normal;
+        margin-top: 5px;
+      }
+      .corner-triangle {
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: 40px solid #00cc44;
+        border-right: 40px solid transparent;
+        border-radius: 10px 0 0 0;
+      }
+      .out-bx {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 10px;
+        overflow: hidden;
+      }
+      .qr-img {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+      .qr-img img {
+        width: 80%;
+        max-width: 300px;
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+  <body>
     <div class="header">
       <div class="menu">☰</div>
       <h1>Digital Bus Pass</h1>
@@ -140,28 +148,45 @@
       </div>
     </div>
 
-    <div class="content">
+    <div id="qr-details">
       <div class="out-bx" id="pass-box">
+        <div class="corner-triangle"></div>
         <div class="pass-card">
-          <div class="head-card"><h3>Confirmed Bus Pass</h3></div>
-          <div class="pass-info">
-            <div><strong>Name</strong><br><span class="highlight">SAYANI SEN</span></div>
-            <div><strong>Employee ID</strong><br><span class="highlight">1948390</span></div>
-            <div><strong>Bus Stop</strong><br><span class="highlight">Thakurpukur</span></div>
-            <div><strong>Route Type</strong><br><span class="highlight">B</span></div>
-            <div><strong>Start</strong><br><span class="highlight">03-Jun-2025</span></div>
-            <div><strong>End</strong><br><span class="highlight">30-Jun-2025</span></div>
+          <div class="head-card">
+            <h3>Confirmed Bus Pass</h3>
           </div>
-          <div style="margin-top: 6px;font-size:12px;">
-            <strong>Route</strong><br>
-            <span class="highlight">Thakurpukur to Gitanjali Park And Return Via Taratala</span>
+
+          <div class="pass-info">
+            <div>
+              <strong>Name</strong><br /><span class="highlight">SAYANI SEN</span>
+            </div>
+            <div>
+              <strong>Employee ID</strong><br /><span class="highlight">1948390</span>
+            </div>
+            <div>
+              <strong>Bus Stop Name</strong><br /><span class="highlight">Thakurpukur</span>
+            </div>
+            <div>
+              <strong>Route Type</strong><br /><span class="highlight">B</span>
+            </div>
+            <div>
+              <strong>Start Date</strong><br /><span class="highlight">03-Jun-2025</span>
+            </div>
+            <div>
+              <strong>End Date</strong><br /><span class="highlight">30-Jun-2025</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px">
+            <strong>Route</strong><br />
+            <span class="highlight">Thakurpukur to Gitanjali Park And Return Via - Taratala</span>
           </div>
         </div>
       </div>
 
       <div class="d-none" id="qr-box">
         <div class="qr-img">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=SAMPLE" alt="QR Code">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=SAMPLE" alt="QR Code" />
         </div>
       </div>
     </div>
@@ -171,18 +196,20 @@
     </div>
 
     <div class="footer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tata_Consultancy_Services_Logo.svg/2560px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS Logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tata_Consultancy_Services_Logo.svg/2560px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS Logo" />
     </div>
-  </div>
 
-  <script>
-    let isQRVisible = false;
-    document.getElementById("clickButton").addEventListener("click", () => {
-      isQRVisible = !isQRVisible;
-      document.getElementById("pass-box").classList.toggle("d-none", isQRVisible);
-      document.getElementById("qr-box").classList.toggle("d-none", !isQRVisible);
-      document.getElementById("text-of-button").innerText = isQRVisible ? "View Details" : "View QR";
-    });
-  </script>
-</body>
+    <script>
+      let isQRVisible = false;
+
+      document.getElementById("clickButton").addEventListener("click", () => {
+        isQRVisible = !isQRVisible;
+
+        document.getElementById("pass-box").classList.toggle("d-none", isQRVisible);
+        document.getElementById("qr-box").classList.toggle("d-none", !isQRVisible);
+
+        document.getElementById("text-of-button").innerText = isQRVisible ? "View Details" : "View QR";
+      });
+    </script>
+  </body>
 </html>
